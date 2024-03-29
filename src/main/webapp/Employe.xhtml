@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+
+    <h:outputStylesheet library="webjars" name="bootstrap/5.3.3/css/bootstrap.min.css" />
+
+    <title>Employees</title>
+</h:head>
+<h:body>
+    <h1>Employee List</h1>
+
+    <h:form>
+        <h:commandButton value="Add Employee" action="add.xhtml" class="btn btn-success float-end" />
+
+        <h:commandButton value="Back to home" action="home.xhtml" class="btn btn-success float-end" />
+
+        <h:dataTable value="#{employeBean.employees}" var="emp"
+                     class="table-custom"
+                     styleClass="table table-striped"
+                     headerClass="table-dark table-center"
+                     rowClasses="text-center"
+                     columnClasses="table-primary,table-danger,table-primary,table-danger,table-primary,table-danger">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                #{emp.id}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Full Name</f:facet>
+                #{emp.name}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Email</f:facet>
+                #{emp.email}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Skills</f:facet>
+                #{emp.skills}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Projects</f:facet>
+                <ui:repeat var="entry" value="#{projectsBean.employeeProjectsMap.entrySet()}">
+                    <ul>
+                        <ui:repeat var="project" value="#{entry.value}">
+                            <li>#{project.name}</li>
+                        </ui:repeat>
+                    </ul>
+                </ui:repeat>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Actions</f:facet>
+                <h:commandButton value="Delete"  action="#{employeBean.deleteEmploye(emp)}" class="btn btn-danger" />
+            </h:column>
+        </h:dataTable>
+    </h:form>
+</h:body>
+</html>

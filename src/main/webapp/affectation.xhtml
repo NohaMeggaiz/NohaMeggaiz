@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Employee Projects Form</title>
+    <h:outputStylesheet library="webjars" name="bootstrap/5.3.3/css/bootstrap.min.css" />
+</h:head>
+<h:body>
+    <h1>Employee Projects Form</h1>
+    <h:form>
+        <div class="mb-3">
+            <label for="employee" class="form-label">Employee:</label>
+            <h:selectOneMenu id="employee" class="form-select" value="#{affectationBean.selectedEmployee}">
+                <f:selectItem itemLabel="Select Employee..." itemValue="" />
+                <f:selectItems value="#{affectationBean.employeeList}" var="employee"
+                               itemLabel="#{employee.name}" itemValue="#{employee}" />
+            </h:selectOneMenu>
+        </div>
+
+        <div class="mb-3">
+            <label for="project" class="form-label">Project:</label>
+            <h:selectOneMenu id="project" class="form-select" value="#{affectationBean.selectedProject}">
+                <f:selectItem itemLabel="Select Project..." itemValue="" />
+                <f:selectItems value="#{affectationBean.projectList}" var="project"
+                               itemLabel="#{project.name}" itemValue="#{project}" />
+            </h:selectOneMenu>
+        </div>
+
+        <div class="mb-3">
+            <label for="implication" class="form-label">Implication:</label>
+            <h:inputText id="implication" class="form-control" value="#{affectationBean.selectedImplication}" />
+        </div>
+
+        <h:commandButton value="Save" action="#{affectationBean.saveAffectation}" class="btn btn-primary" />
+    </h:form>
+</h:body>
+</html>
